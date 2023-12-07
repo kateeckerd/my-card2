@@ -20,9 +20,56 @@
 </head>
 
 <body>
-  <my-card></my-card>
+  <div>
+    <button id="button-duplicate" onclick="duplicateCard()">Duplicate</button>
+    <button id="button-delete" onclick="deleteCard()">Delete</button>
+    <button id="button-color" onclick="toggleBackground()">Toggle Background Color</button>
+    <button id="button-heading" onclick="changeHeading()">Change Heading</button>
+    <button id="button-description" onclick="toggleDescription()">Toggle Description</button>
+  </div>
 
-  <script type="module" src="./src/my-card.js"></script>
+  <my-card></my-card>
+  <script>
+    function duplicateCard() {
+      let card = document.querySelector("my-card").shadowRoot.querySelector(".card");
+      let clonedCard = card.cloneNode(true);
+      clonedCard.id = 'clonedcard';
+      document.querySelector("my-card").shadowRoot.appendChild(clonedCard);
+    }
+  
+    function deleteCard() {
+      let card = document.querySelector("my-card").shadowRoot.querySelector(".card");
+      let clonedCard = card.cloneNode(true);
+      clonedCard.id = 'clonedcard';
+      document.querySelector("my-card").shadowRoot.querySelector("#clonedcard").remove();
+    }
+  
+    function toggleBackground() {
+      document.querySelector("my-card").toggleBackground();
+    }
+    
+    function changeHeading() {
+      let heading = prompt("Name the card:");
+      if (heading) {
+        document.querySelector("my-card").name = heading;
+      }
+    }
+    
+    function toggleDescription() {
+      const details = document.querySelector("my-card").shadowRoot.querySelector('summary');
+      if (details.parentNode.getAttribute('open')) {
+        details.parentNode.removeAttribute('open');
+      }
+      else {
+        details.parentNode.setAttribute('open','open');   
+      }
+    }
+
+
+
+</script>
+<script type="module" src="./src/my-card.js"></script>
 </body>
+
 
 </html>

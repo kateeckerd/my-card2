@@ -5,6 +5,11 @@ const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
 class MyCard extends LitElement {
   static properties = {
     header: { type: String },
+    name: { type: String },
+    image: { type: String },
+    alt: { type: String },
+    description: { type: String },
+    toggle: { type: Boolean, reflect: true }
   }
 
   static styles = css`
@@ -21,6 +26,8 @@ class MyCard extends LitElement {
       text-align: center;
       background-color: var(--my-card-background-color);
     }
+
+
 
     main {
       flex-grow: 1;
@@ -134,37 +141,14 @@ button {
 
   render() {
     return html`
-      <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
-        <h1>${this.header}</h1>
-
-        <p>Edit <code>src/MyCard.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
-      </main>
-
-      <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
-      </p>
+   
       <div class="wrapper">
 <img class="image"
   src="https://brand.psu.edu/images/backgrounds/atheltic-wrong.png"
   alt="Penn State Logo" width="400" height="225">
 
 <div class="header">
-  <h2>Penn State Football Nittany Lions</h2>
+  <h2>Penn State Football</h2>
 </div>
   <h3>Description</h3>
     <div class="description">
