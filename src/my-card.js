@@ -9,7 +9,11 @@ class MyCard extends LitElement {
     image: { type: String },
     alt: { type: String },
     description: { type: String },
-    toggle: { type: Boolean, reflect: true }
+    toggle: { type: Boolean, reflect: true },
+    variation: {
+      type: Boolean,
+      reflect: true,
+    },
   }
 
   static styles = css`
@@ -27,6 +31,9 @@ class MyCard extends LitElement {
       background-color: var(--my-card-background-color);
     }
 
+    :host([variation]) .card {
+      background-color: #008aff;
+    }
 
 
     main {

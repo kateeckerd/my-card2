@@ -20,56 +20,66 @@
 </head>
 
 <body>
-  <div>
-    <button id="button-duplicate" onclick="duplicateCard()">Duplicate</button>
-    <button id="button-delete" onclick="deleteCard()">Delete</button>
-    <button id="button-color" onclick="toggleBackground()">Toggle Background Color</button>
-    <button id="button-heading" onclick="changeHeading()">Change Heading</button>
-    <button id="button-description" onclick="toggleDescription()">Toggle Description</button>
+  <header>
+    <h1>PSU Football</h1>
+  </header>
+
+  <div class="btn-wrapper">
+    <button id="duplicate">Duplicate</button>
+    <button id="delcard">Delete card</button>
+    <button id="background">Toggle background color</button>
+    <button id="modifytitle">Change name</button>
   </div>
-
-  <my-card></my-card>
+  
+  <div id="app">
+    <my-card></my-card>
+    <my-card name="option 2" information="Now only $25.00!"></my-card>
+    <my-card name="option 3">
+      <img src="https://picsum.photos/200/300" alt="random image" />
+      <a href="https://hax.psu.edu">Buy now!</a>
+      <p>I lovee this product!</p>
+    </my-card>
+  </div>
+  
+  <script type="module" src="./src/my-card.js"></script>
   <script>
-    function duplicateCard() {
-      let card = document.querySelector("my-card").shadowRoot.querySelector(".card");
-      let clonedCard = card.cloneNode(true);
-      clonedCard.id = 'clonedcard';
-      document.querySelector("my-card").shadowRoot.appendChild(clonedCard);
-    }
-  
-    function deleteCard() {
-      let card = document.querySelector("my-card").shadowRoot.querySelector(".card");
-      let clonedCard = card.cloneNode(true);
-      clonedCard.id = 'clonedcard';
-      document.querySelector("my-card").shadowRoot.querySelector("#clonedcard").remove();
-    }
-  
-    function toggleBackground() {
-      document.querySelector("my-card").toggleBackground();
-    }
-    
-    function changeHeading() {
-      let heading = prompt("Name the card:");
-      if (heading) {
-        document.querySelector("my-card").name = heading;
-      }
-    }
-    
-    function toggleDescription() {
-      const details = document.querySelector("my-card").shadowRoot.querySelector('summary');
-      if (details.parentNode.getAttribute('open')) {
-        details.parentNode.removeAttribute('open');
-      }
-      else {
-        details.parentNode.setAttribute('open','open');   
-      }
-    }
+    // duplicate card
+    const duplicateButton = document.querySelector('#duplicate')
 
+    duplicateButton.addEventListener('click', () => {
+        const card = document.querySelector('my-card');
+        card.insertAdjacentElement('afterend', card.cloneNode());
+    });
 
+    // Delete Card
+    const deleteButton = document.querySelector('#delcard')
 
-</script>
-<script type="module" src="./src/my-card.js"></script>
+    deleteButton.addEventListener('click', function() {
+        const allCardClones = document.querySelectorAll('my-card');
+        if (allCardClones.length > 1) {
+          allCardClones[allCardClones.length - 1].remove();
+        }
+    });
+
+    // Toggle background color
+    const backgroundButton = document.querySelector('#background')
+
+    backgroundButton.addEventListener('click', function() {
+        const card = document.querySelector('my-card');
+        card.variation = !card.variation;
+    });
+
+    // Change name
+    const nameBtn = document.querySelector('#modifytitle');
+
+    nameBtn.addEventListener('click', function() {
+      let name = prompt("Name the card:");
+
+      if(name) {
+        document.querySelector('my-card').name = name;
+      }
+    });
+  </script>
 </body>
-
 
 </html>
